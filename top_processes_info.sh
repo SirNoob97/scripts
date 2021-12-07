@@ -1,6 +1,6 @@
 #!/bin/bash
 
-top_flags="-bcs -o %CPU -u "$(whoami)" -n 1 -w 512"
+top_flags="-bcs -o %CPU -u $(whoami) -n 1 -w 512"
 top_cmd="top ${top_flags}"
 awk_pattern='
 BEGIN {
