@@ -1,10 +1,28 @@
 #!/bin/bash
 
-# 10 processes with the highest CPU consumption
 top_flags="-bcs -o %CPU -u "$(whoami)" -n 1 -w 512"
 top_cmd="top ${top_flags}"
-$top_cmd | grep -vE "${top_cmd}" | head -20 | awk '{print $0}'
+awk_pattern='
+BEGIN {
+    pids_command = "pidstat -dlurv -p %s --human"
+}
+{
+  if($0 !~ top_cmd && NR <= 20) {
+    print $0
+    first[NR] = $1 ""
+  }
 
-# more info of the 5 processes with the highest CPU consumption
-# TODO: use this command with awk
-pidstat -dlu -p "1033,1039,918,919,138" --human
+  if($1 == "PID") start = NR + 1
+}
+END {
+  for(i = start; i <= start + 5; i++) {
+    pids = (pids first[i]",")
+  }
+
+  gsub(",$", "", pids)
+  print("")
+  system(sprintf(pids_command, pids))
+}
+'
+
+$top_cmd | awk -v "top_cmd=$top_cmd" "$awk_pattern"
