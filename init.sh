@@ -6,4 +6,6 @@ nmcli radio wifi on
 
 nmcli device show wlp2s0 | grep 'GENERAL\.STATE:' | awk '{ if("(connected)" == $3"") exit 0 }' && sudo apt update
 
-ssh-add
+for pkey in $(find $HOME/.ssh/ -type f \( -perm 'u=rw' ! -perm 'g=rw,o=rw' \)); do
+    ssh-add $pkey
+done
