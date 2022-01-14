@@ -1,11 +1,25 @@
 #!/bin/bash
 
+set -o pipefail
+
+interface='wlp2s0'
+
+
 nmcli radio wifi on
 
-[ "enabled" == "$(nmcli radio wifi)" ] && nmcli device connect wlp2s0 --ask
+i=1
+APS=0
+while [ $i -ne 0 ]; do
+  nmcli device wifi rescan ifname "$interface" > /dev/null 2>&1 \
+    && APS=$(nmcli --terse device wifi list ifname $interface | wc -l)
 
-nmcli device show wlp2s0 | grep 'GENERAL\.STATE:' | awk '{ if("(connected)" == $3"") exit 0 }' && sudo apt update
-
-for pkey in $(find $HOME/.ssh/ -type f \( -perm 'u=rw' ! -perm 'g=rw,o=rw' \)); do
-    ssh-add $pkey
+  [ $APS -gt 1 ] && i=0
 done
+
+nmcli device connect $interface --ask
+
+nmcli --fields 'DEVICE,STATE' --terse device status \
+  | grep -E "^$interface" \
+  | cut -d ':' -f 2 \
+  | xargs -I '{}' [ 'connected' = '{}' ] \
+  && sudo $update_command
