@@ -1,6 +1,6 @@
 #!/bin/bash
 
-install_dir="$HOME/.local/bin"
+install_dir="${1:-$HOME/.local/bin}"
 
 [ ! -d $install_dir ] && mkdir -p $install_dir
 
