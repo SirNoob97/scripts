@@ -36,3 +36,7 @@ nmcli --fields 'DEVICE,STATE' --terse device status \
   | cut -d ':' -f 2 \
   | xargs -I '{}' [ 'connected' = '{}' ] \
   && sudo $update_command
+
+find $HOME/.ssh/ -type f \
+  \( -perm 'u=rw-,go=---' -and ! -name 'authorized_keys' \) \
+  -exec ssh-add {} \;
