@@ -13,4 +13,6 @@ function __install {
 
 export -f __install
 
-scripts=$(find $PWD -path */postgresql -prune -o -type f -perm '-u=x' \( -name '*.sh' -not -name '*backup*' -not -name '*install*' \) -printf "%h/%f\n")
+find $PWD -path */postgresql -prune -o -type f -perm '-u=x' \
+  \( -name '*.sh' -not -name '*backup*' -not -name '*install*' -not -name '*test*' \) \
+  -exec bash -c '__install {}' \;
