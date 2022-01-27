@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# TODO:// extract enabled units function
-# list the services, sockets or timers that need a daemon reload
+__list_not_found_units() {
+  systemctl list-units --no-pager --no-legend --all --type $1 --state not-found \
+    | awk '{print $1}'
+}
 
-__list_units() {
-  echo $1 $2
-  systemctl list-units --no-pager --no-legend --all --type $1 --state $2 \
+__list_enabled_units() {
+  systemctl list-unit-files --no-pager --no-legend --all --type $1 --state enabled \
     | awk '{print $1}'
 }
 
@@ -14,12 +15,12 @@ __list_services_that_need_daemon_reload() {
 }
 
 
-for ut in "service" "socket" "timer"; do
-  echo "---${ut^}s---"
-  for u in $(__list_units $ut 'enabled'); do
-    __list_services_that_need_daemon_reload $u
+for unit_type in "service" "socket" "timer"; do
+  echo "---${unit_type^}s---"
+  for unit in $(__list_enabled_units "$unit_type"); do
+    __list_services_that_need_daemon_reload $unit
   done
-  echo -e "\n---Not found ${ut}s---"
-  __list_units $ut not-found
+  echo -e "\n---Not found ${unit_type}s---"
+  __list_not_found_units $unit_type
   echo ""
 done
