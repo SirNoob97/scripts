@@ -84,7 +84,7 @@ function __set_opacity {
       exit 1
     fi
   fi
-  sed -i --regexp-extended --expression="s%(^background_opacity:\s)(1.0|0.[0-9]{1})%\1$1%" $opacity_file
+  sed -i --regexp-extended --expression="s%(^\s{1,}opacity:\s)(1.0|0.[0-9]{1})%\1$1%" $opacity_file
 }
 
 directory_flag="-d"
