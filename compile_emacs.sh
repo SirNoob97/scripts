@@ -5,20 +5,18 @@
 ./configure --without-dbus \
             --without-gconf \
             --without-gsettings \
-            # email support
             --without-pop \
-            # images support
-            --without-xpm \
-            --without-jpeg \
-            --without-tiff \
-            --without-gif \
-            --without-png \
-            --without-rsvg \
-            # graphical features
             --without-toolkit-scroll-bars \
             --with-x-toolkit=no \
-            # gcc options
+            --with-native-compilation \
+            --with-json \
             --enable-gcc-warnings=warn-only
+            # --without-xpm \
+            # --without-jpeg \
+            # --without-tiff \
+            # --without-gif \
+            # --without-png \
+            # --without-rsvg \
 
 make -j 4
 sudo make -j 4 install
