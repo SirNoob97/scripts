@@ -2,8 +2,8 @@
 
 set -eu -o pipefail
 
-DIRECTORY="${1:-$HOME/.local/share/fonts/}"
-AWK_PATTERN='
+directory="${1:-${HOME}/.local/share/fonts/}"
+awk_pattern='
 BEGIN {
   FS = ":"
 }
@@ -33,5 +33,5 @@ function isort(A, n, i, j, hold) {
   }
 }
 '
-echo -e "Available fonts installed in $DIRECTORY\n"
-fc-list | grep "$DIRECTORY" | awk "$AWK_PATTERN" | grep -vE '^$|[iI]con[s]'
+echo -e "Available fonts installed in ${directory}\n"
+fc-list | grep "${directory}" | awk "${awk_pattern}" | grep -vE '^$|[iI]con[s]'

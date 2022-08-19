@@ -2,7 +2,7 @@
 
 set -eu
 
-export install_dir="${1:-$HOME/.local/bin}"
+export install_dir="${1:-${HOME}/.local/bin}"
 
 [ ! -d $install_dir ] && mkdir -p $install_dir
 

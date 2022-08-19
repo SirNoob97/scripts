@@ -11,10 +11,10 @@ for file_checksum in $data; do
     file="${file_checksum#*--}"
     
     if [ -f $temp_dir/$checksum ]; then
-        echo "  $file" >> $temp_dir/$checksum
+        echo "  ${file}" >> $temp_dir/$checksum
     else
         touch $temp_dir/$checksum
-        echo "  $file" >> $temp_dir/$checksum
+        echo "  ${file}" >> $temp_dir/$checksum
     fi
 done
 

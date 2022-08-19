@@ -7,10 +7,10 @@ set -eu
 function __help {
   name=$(basename $0)
   echo "\
-$name is a cli tool to modify alacritty visual settings.
+${name} is a cli tool to modify alacritty visual settings.
 
-Usage of $name:
-  $name [OPTIONS...]
+Usage of ${name}:
+  ${name} [OPTIONS...]
 
 OPTIONS:
   -t, --theme string    Theme name.
@@ -21,25 +21,25 @@ OPTIONS:
   -h, --help            Display help message.
 
 FILES:
-  $main_conf
+  ${main_conf}
       Alacritty main config file. In this file you must add the folowing:
 
         import:
-        - $themes_dir/theme_name.yml
-        - $font_file
-        - $opacity_file
-        - $actual_theme_file
+        - ${themes_dir}/theme_name.yml
+        - ${font_file}
+        - ${opacity_file}
+        - ${actual_theme_file}
 
-  $themes_dir/
+  ${themes_dir}/
       In this directory are the color schemes of alacritty.
 
-  $actual_theme_file
+  ${actual_theme_file}
       File where alacritty will read the color scheme.
 
-  $font_file
+  ${font_file}
       Font name, style and size are in this file.
 
-  $opacity_file
+  ${opacity_file}
       This file has the opacity or transparency of alacritty."
 }
 
@@ -60,9 +60,9 @@ function __list_themes {
 
 function __set_theme {
   error_message="Theme name is required"
-  __is_empty $1
+  __is_empty "${1}"
 
-  theme="$themes_dir/$1.yml"
+  theme="$themes_dir/${1}.yml"
   [ ! -f $theme ] && echo "Theme $1 not found" && exit 1
 
   cp --remove-destination --force $theme $actual_theme_file
@@ -90,25 +90,25 @@ function __set_opacity {
 }
 
 directory_flag="-d"
-alacritty_home="$HOME/.config/alacritty"
-themes_dir="$alacritty_home/themes"
+alacritty_home=$HOME/.config/alacritty
+themes_dir=$alacritty_home/themes
 
 error_message="Themes directory is empty"
 __is_empty "$(ls -A $themes_dir)"
 
 file_flag="-f"
-main_conf="$alacritty_home/alacritty.yml"
-font_file="$alacritty_home/font.yml"
-opacity_file="$alacritty_home/opacity.yml"
-actual_theme_file="$alacritty_home/theme.yml"
+main_conf=$alacritty_home/alacritty.yml
+font_file=$alacritty_home/font.yml
+opacity_file=$alacritty_home/opacity.yml
+actual_theme_file=$alacritty_home/theme.yml
 
 for directory in $alacritty_home $themes_dir; do
-  error_message="$directory not exists"
+  error_message="${directory} not exists"
   __exists $directory $directory_flag
 done
 
 for file in $main_conf $font_file $opacity_file; do
-  error_message="$file not exists"
+  error_message="${file} not exists"
   __exists $file $file_flag
 done
 

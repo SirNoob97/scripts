@@ -26,4 +26,4 @@ END {
 }
 '
 
-$top_cmd | awk -v "top_cmd=${top_cmd}" -v "pid_cmd=${pidstat_cmd}" "$awk_pattern"
+$top_cmd | awk -v "top_cmd=${top_cmd}" -v "pid_cmd=${pidstat_cmd}" "${awk_pattern}"
