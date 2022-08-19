@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu
 
 export install_dir="${1:-$HOME/.local/bin}"
 

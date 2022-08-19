@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu -o pipefail
 
 top_flags="-bcs -o %CPU -u $(whoami) -n 1 -w 512"
 pidstat_flags="-dlurv -p %s --human"

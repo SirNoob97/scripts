@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu -o pipefail
 
 DIRECTORY="${1:-$HOME/.local/share/fonts/}"
 AWK_PATTERN='

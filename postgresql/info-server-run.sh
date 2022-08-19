@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu
 
 function __help {
   echo "\

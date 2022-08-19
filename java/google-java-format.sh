@@ -1,5 +1,7 @@
 #!/bin/env bash
 
+set -eu
+
 # remember to download from the latest release from the releases section
 # https://github.com/google/google-java-format
 

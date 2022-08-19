@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu -o pipefail
 
 home_config="$HOME/.config/"
 apt_dir="/etc/apt"

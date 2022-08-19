@@ -1,3 +1,7 @@
+#!/bin/env bash
+
+set -eu
+
 echo 'BEFORE START!!!'
 echo '1) Verify the certificates subjects.'
 echo '2) This script can only be run by the root or postgres user, because access to the postgresql data directory is required.'

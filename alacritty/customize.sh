@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu
 
 [ $# -eq 0 ] && echo "Use the '-h' flag to se the usage of the script" && exit 1
 

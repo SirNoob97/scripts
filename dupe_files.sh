@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/bin/env bash
+
+set -eu -o pipefail
 
 data=$(find $PWD -type f | xargs md5sum | awk '{print $1"--"$2}' | sort)
 
