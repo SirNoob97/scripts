@@ -19,9 +19,8 @@ for file_checksum in $data; do
 done
 
 for f in $temp_dir/*; do
-    if [ $(wc -l < "$f") -gt 1 ]; then
-        echo -e "Files that share the md5 checksum: ${f##*/}\n"
-        cat $f
+    [ $(wc -l < "$f") -gt 1 ] && \
+        echo -e "Files that share the md5 checksum: ${f##*/}\n" && \
+        cat $f && \
         echo ""
-    fi
 done
