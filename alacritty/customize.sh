@@ -44,11 +44,11 @@ FILES:
 }
 
 function __exists {
-  [ ! $2 $1 ] && echo "$error_message" && exit 1
+  [ ! $2 $1 ] && echo "${error_message}" && exit 1 || true
 }
 
 function __is_empty {
-  [ -z "$1" ] && echo "$error_message" && exit 1
+  [ -z "${1}" ] && echo "${error_message}" && exit 1 || true
 }
 
 function __list_themes {
