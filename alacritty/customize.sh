@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-set -eu
+set -u
 
 [ $# -eq 0 ] && echo "Use the '-h' flag to se the usage of the script" && exit 1
 
@@ -44,11 +44,11 @@ FILES:
 }
 
 function __exists {
-  [ ! $2 $1 ] && echo "${error_message}" && exit 1 || true
+  [ ! $2 $1 ] && echo "${error_message}" && exit 1
 }
 
 function __is_empty {
-  [ -z "${1}" ] && echo "${error_message}" && exit 1 || true
+  [ -z "${1}" ] && echo "${error_message}" && exit 1
 }
 
 function __list_themes {

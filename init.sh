@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-set -eu -o pipefail
+set -u -o pipefail
 
 interface='wlp2s0'
 repository_managers='apt yum apt-get dnf"'
