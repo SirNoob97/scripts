@@ -2,4 +2,4 @@
 
 set -e
 
-find $1 \( -nogroup -or -nouser \) -print
+find ${1:-$PWD} \( -nogroup -or -nouser \) -print
