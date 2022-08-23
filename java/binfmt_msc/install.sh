@@ -6,7 +6,7 @@
 # Guide to configuring binfmt_misc to run Java class files as binaries. e.g $ ./Main.class
 # There are also steps to configure execution of jar files
 
-set -eu -o pipefail
+set -eu
 
 register=/proc/sys/fs/binfmt_misc/register
 
