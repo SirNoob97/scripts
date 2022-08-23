@@ -15,7 +15,7 @@ function __install {
 
 export -f __install
 
-find $PWD -path */postgresql \
+find $PWD \( -path */postgresql -o -path */java/binfmt_msc \) \
      -prune \
      -o \
      -type f \
